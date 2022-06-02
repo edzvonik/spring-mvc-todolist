@@ -14,6 +14,8 @@
 
     <mvc:annotation-driven/>
 
+    <mvc:resources mapping="/webjars/**" location="/webjars/"/>
+
     <bean id="dataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
         <property name="url" value="jdbc:h2:mem:todolist"/>
