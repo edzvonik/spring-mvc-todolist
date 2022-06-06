@@ -1,49 +1,25 @@
 package ru.dzvonik.todolist.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.time.LocalDate;
 
+@Getter
+@Builder
+@ToString
+@EqualsAndHashCode(of = "id")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Task {
 
     private int id;
     private String title;
-    private boolean is_complete;
-    private LocalDate created_at;
+    private boolean complete;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
-    public Task(int id, String title) {
-        this.id = id;
-        this.title = title;
-        is_complete = false;
-        created_at = LocalDate.now();
-    }
-
-    public Task(int id, String title, boolean is_complete, LocalDate created_at) {
-        this.id = id;
-        this.title = title;
-        this.is_complete = is_complete;
-        this.created_at = created_at;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isIs_complete() {
-        return is_complete;
-    }
-
-    public void setIs_complete(boolean is_complete) {
-        this.is_complete = is_complete;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public LocalDate getCreated_at() {
-        return created_at;
-    }
 }

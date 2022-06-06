@@ -16,6 +16,8 @@
 
     <mvc:resources mapping="/webjars/**" location="/webjars/"/>
 
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
     <bean id="dataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
         <property name="url" value="jdbc:h2:mem:todolist"/>
@@ -24,8 +26,8 @@
     </bean>
 
     <jdbc:initialize-database data-source="dataSource1">
-        <jdbc:script location="classpath:schema.sql"></jdbc:script>
-        <jdbc:script location="classpath:h2-data.sql"></jdbc:script>
+        <jdbc:script location="classpath:h2/init.sql"></jdbc:script>
+        <jdbc:script location="classpath:h2/populating.sql"></jdbc:script>
     </jdbc:initialize-database>
 
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
