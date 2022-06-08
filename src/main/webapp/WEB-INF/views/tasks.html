@@ -16,41 +16,43 @@
             <div class="col-8">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created</th>
-                        <th scope="col">Updated</th>
-                        <th scope="col">Is complete</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Updated</th>
+                            <th scope="col">Is complete</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="task: ${tasks}">
-                        <td th:text="${task.getId()}">1</td>
-                        <td th:text="${task.getTitle()}">Todo something</td>
-                        <td th:text="${task.getCreatedAt()}">2022-06-01</td>
-                        <td th:text="${task.getUpdatedAt()}">2022-06-01</td>
-                        <td>
-                            <input type="checkbox"
-                                   th:id="'complete-checkbox-' + ${task.getId()}"
-                                   class="complete-checkbox">
-                        </td>
-                        <td>
-                            <a class="edit-button btn btn-sm btn-outline-primary"
-                               th:id="'edit-button-' + ${task.getId()}">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <button type="button"
-                                    th:id="'delete-button-' + ${task.getId()}"
-                                    class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash3"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        <tr th:each="task: ${tasks}"
+                            th:class="${task.isComplete()} ? 'table-success text-decoration-line-through'">
+                            <td th:text="${task.getId()}">1</td>
+                            <td th:text="${task.getTitle()}">Todo something</td>
+                            <td th:text="${task.getCreatedAt()}">2022-06-01</td>
+                            <td th:text="${task.getUpdatedAt()}">2022-06-01</td>
+                            <td>
+                                <input type="checkbox"
+                                       th:checked="${task.isComplete()} ? 'checked'"
+                                       th:id="'complete-checkbox-' + ${task.getId()}"
+                                       class="complete-checkbox">
+                            </td>
+                            <td>
+                                <a class="edit-button btn btn-sm btn-outline-primary"
+                                   th:id="'edit-button-' + ${task.getId()}">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        th:id="'delete-button-' + ${task.getId()}"
+                                        class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -72,14 +74,17 @@
                 </div>
                 <div class="modal-body">
 
-                    <form th:method="PATCH" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">
-                        <div class="form-group mb-2">
+<!--                    <form th:method="PATCH" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">-->
+                    <form action="#" th:action="@{/tasks/{id}">
+                        <div class="form-group mb-2" id="edit-form">
                             <label for="inputTitle">Title</label>
-                            <input th:field="*{title}" type="text" class="form-control" id="inputTitle">
+<!--                            <input th:field="*{title}" type="text" class="form-control" id="inputTitle">-->
+                            <input type="text" class="form-control" id="inputTitle">
                         </div>
                         <div class="form-check mb-2">
                             <label for="completeCheck">Complete!</label>
-                            <input th:field="*{complete}" type="checkbox" class="form-check-input" id="completeCheck">
+<!--                            <input th:field="*{complete}" type="checkbox" class="form-check-input" id="completeCheck">-->
+                            <input type="checkbox" class="form-check-input" id="completeCheck">
                         </div>
                     </form>
 

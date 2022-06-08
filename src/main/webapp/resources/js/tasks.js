@@ -1,12 +1,10 @@
 $(document).ready(function() {
 
-    $(".complete-checkbox").change(function () {
+    $(".complete-checkbox").on("click", function() {
         if (this.checked) {
-            $(this).closest("tr").css("text-decoration", "line-through");
-            $(this).closest("tr").addClass("table-success");
+            $(this).closest("tr").addClass("table-success text-decoration-line-through");
         } else {
-            $(this).closest("tr").css("text-decoration", "none");
-            $(this).closest("tr").removeClass("table-success");
+            $(this).closest("tr").removeClass("table-success text-decoration-line-through");
         }
     });
 
@@ -17,12 +15,16 @@ $(document).ready(function() {
         $.get(href, function(task) {
             $("#inputTitle").val(task.title);
 
-            var flag = (task.is_complete === "true");
-            $("#completeCheck").attr("checked", flag);
+            var complete = (task.complete === "true");
+            $("#completeCheck").prop("checked", complete);
         });
 
         var editModal = new bootstrap.Modal(document.getElementById('exampleModal'));
         editModal.show();
+    });
+
+    $("#exampleModal").on("hidden.bs.modal", function(e) {
+        $(this).find("#edit-form")[0].reset();
     });
 
 });
