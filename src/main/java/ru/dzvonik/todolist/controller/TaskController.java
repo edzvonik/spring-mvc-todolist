@@ -1,7 +1,6 @@
 package ru.dzvonik.todolist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import ru.dzvonik.todolist.dao.TaskDAO;
 import ru.dzvonik.todolist.model.Task;
 
@@ -30,14 +28,14 @@ public class TaskController {
         return "tasks";
     }
 
-    @GetMapping(value = "/{id}/edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Task edit(@PathVariable("id") int id) {
-        return taskDAO.show(id);
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model) {
+        model.addAttribute("task", taskDAO.show(id));
+        return "edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute Task task, @PathVariable("id") int id) {
+    public String update(@PathVariable("id") int id, @ModelAttribute("task") Task task) {
         taskDAO.update(id, task);
         return "redirect:/tasks";
     }

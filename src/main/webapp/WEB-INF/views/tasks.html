@@ -21,7 +21,6 @@
                             <th scope="col">Title</th>
                             <th scope="col">Created</th>
                             <th scope="col">Updated</th>
-                            <th scope="col">Is complete</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -33,15 +32,13 @@
                             <td th:text="${task.getTitle()}">Todo something</td>
                             <td th:text="${task.getCreatedAt()}">2022-06-01</td>
                             <td th:text="${task.getUpdatedAt()}">2022-06-01</td>
+<!--                            <td>-->
+<!--                                <input type="checkbox"-->
+<!--                                       th:checked="${task.isComplete()} ? 'checked'"-->
+<!--                                       class="complete-checkbox">-->
+<!--                            </td>-->
                             <td>
-                                <input type="checkbox"
-                                       th:checked="${task.isComplete()} ? 'checked'"
-                                       th:id="'complete-checkbox-' + ${task.getId()}"
-                                       class="complete-checkbox">
-                            </td>
-                            <td>
-                                <a class="edit-button btn btn-sm btn-outline-primary"
-                                   th:id="'edit-button-' + ${task.getId()}">
+                                <a th:href="@{'/tasks/' + ${task.getId()} + '/edit'}" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
@@ -58,41 +55,6 @@
             </div>
             <div class="col-8 text-end">
                 <button type="button" class="btn btn-primary">Add task</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit task</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-<!--                    <form th:method="PATCH" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">-->
-                    <form action="#" th:action="@{/tasks/{id}">
-                        <div class="form-group mb-2" id="edit-form">
-                            <label for="inputTitle">Title</label>
-<!--                            <input th:field="*{title}" type="text" class="form-control" id="inputTitle">-->
-                            <input type="text" class="form-control" id="inputTitle">
-                        </div>
-                        <div class="form-check mb-2">
-                            <label for="completeCheck">Complete!</label>
-<!--                            <input th:field="*{complete}" type="checkbox" class="form-check-input" id="completeCheck">-->
-                            <input type="checkbox" class="form-check-input" id="completeCheck">
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
         </div>
     </div>

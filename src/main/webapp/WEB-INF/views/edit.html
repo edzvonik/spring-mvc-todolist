@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit task</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.8.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="mt-5 container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form th:method="PATCH" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID</label>
+                        <input class="form-control" disabled="disabled" type="text" th:field="*{id}" id="id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" th:field="*{title}" id="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskCreatedAt" class="form-label">Created At</label>
+                        <input th:field="*{createdAt}" type="text" class="form-control" id="taskCreatedAt">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskComplete" class="form-label">Complete</label>
+                        <input th:checked="${task.isComplete()}" th:field="*{complete}" type="checkbox" class="form-check-label" id="taskComplete">
+                    </div>
+
+                    <div class="text-end">
+                        <button type="mr-3 button" class="btn btn-primary">Back</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/webjars/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>
