@@ -14,24 +14,23 @@
                 <form th:method="PATCH" th:action="@{/tasks/{id}(id=${task.getId()})}" th:object="${task}">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
-                        <input class="form-control" disabled="disabled" type="text" th:field="*{id}" id="id">
+                        <input th:field="*{id}" id="id" class="form-control" disabled="disabled" type="text">
                     </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" th:field="*{title}" id="title">
+                        <input th:field="*{title}" id="title" class="form-control" type="text">
                     </div>
                     <div class="mb-3">
-                        <label for="taskCreatedAt" class="form-label">Created At</label>
-                        <input th:field="*{createdAt}" type="text" class="form-control" id="taskCreatedAt">
+                        <label for="createdAt" class="form-label">Created At</label>
+                        <input th:field="*{createdAt}" id="createdAt" class="form-control" type="text">
                     </div>
                     <div class="mb-3">
-                        <label for="taskComplete" class="form-label">Complete</label>
-                        <input th:checked="${task.isComplete()}" th:field="*{complete}" type="checkbox" class="form-check-label" id="taskComplete">
+                        <label for="isComplete" class="form-label">Complete</label>
+                        <input th:checked="${task.isComplete()}" th:field="*{complete}" id="isComplete" class="form-check-label" type="checkbox">
                     </div>
-
                     <div class="text-end">
-                        <button type="mr-3 button" class="btn btn-primary">Back</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a href="/tasks" class="btn btn-primary">Back</a>
+                        <button class="btn btn-primary" type="submit">Save changes</button>
                     </div>
                 </form>
             </div>
