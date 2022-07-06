@@ -4,11 +4,11 @@ import org.springframework.stereotype.Component;
 import ru.dzvonik.todolist.model.Task;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +43,8 @@ public class TaskDAO {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 boolean complete = rs.getBoolean("is_complete");
-                Date createdAt = rs.getDate("created_at");
-                Date updatedAt = rs.getDate("updated_at");
+                LocalDate createdAt = rs.getDate("created_at").toLocalDate();
+                LocalDate updatedAt = rs.getDate("updated_at").toLocalDate();
 
                 Task task = Task.builder()
                         .id(id)
@@ -74,8 +74,8 @@ public class TaskDAO {
                 int taskId = rs.getInt("id");
                 String title = rs.getString("title");
                 boolean complete = rs.getBoolean("is_complete");
-                Date createdAt = rs.getDate("created_at");
-                Date updatedAt = rs.getDate("updated_at");
+                LocalDate createdAt = rs.getDate("created_at").toLocalDate();
+                LocalDate updatedAt = rs.getDate("updated_at").toLocalDate();
 
                 task = Task.builder()
                         .id(taskId)
@@ -96,10 +96,11 @@ public class TaskDAO {
         try {
             String query = "UPDATE tasks SET title=?, is_complete=?, created_at=?, updated_at=? WHERE id=?";
             PreparedStatement ps = connection.prepareStatement(query);
+            // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             ps.setString(1, task.getTitle());
             ps.setBoolean(2, task.isComplete());
-            ps.setDate(3, new java.sql.Date(task.getCreatedAt().getTime()));
+            ps.setDate(3, java.sql.Date.valueOf(task.getCreatedAt()));
             ps.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now()));
             ps.setInt(5, task.getId());
             ps.executeUpdate();

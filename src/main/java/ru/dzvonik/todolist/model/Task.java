@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,10 +25,10 @@ public class Task {
     private String title;
     private boolean complete;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createdAt;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date updatedAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate updatedAt;
 
 }
