@@ -32,11 +32,6 @@
                             <td th:text="${task.getTitle()}">Todo something</td>
                             <td th:text="${task.getCreatedAt()}">2022-06-01</td>
                             <td th:text="${task.getUpdatedAt()}">2022-06-01</td>
-<!--                            <td>-->
-<!--                                <input type="checkbox"-->
-<!--                                       th:checked="${task.isComplete()} ? 'checked'"-->
-<!--                                       class="complete-checkbox">-->
-<!--                            </td>-->
                             <td>
                                 <a th:href="@{'/tasks/' + ${task.getId()} + '/edit'}" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-pencil"></i>

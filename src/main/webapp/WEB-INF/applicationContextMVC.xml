@@ -37,6 +37,11 @@
 
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.java8time.dialect.Java8TimeDialect"/>
+            </set>
+        </property>
         <property name="enableSpringELCompiler" value="true"/>
     </bean>
 

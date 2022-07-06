@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS tasks;
+
 CREATE TABLE tasks(
   id INT NOT NULL,
   title VARCHAR NOT NULL,
